@@ -40,3 +40,6 @@ if __name__ == "__main__":
     for i in range(1,df[1].size):
         df[3][i] = collection[i-1] 
     
+    with ExcelWriter(date+'产品数据'+'.xlsx') as writer:
+        liuliang_df.to_excel(writer, sheet_name='流量地图',index = None)
+    
