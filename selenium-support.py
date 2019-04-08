@@ -16,7 +16,7 @@ cat_dir = 'C:/Users/Administrator/Desktop/竞品ID.xlsx'
 df = pd.read_excel(cat_dir,header = None)
 chanpin = []
 for i in range(1,df[1].size):
-    chanpin.append(df[1][i])
+    chanpin.append([df[1][i],df[2][i]])
 
 url = 'https://detail.tmall.hk/hk/item.htm?id='
 
@@ -32,14 +32,21 @@ def getHtml(url, loadmore = False, waittime = 1):
     
 if __name__ == "__main__":
     collection = []
-    for j in chanpin:
-        url_temp= url+str(j)
+    for product in chanpin:
+        url_temp= url+str(product[0])
         html = getHtml(url_temp, loadmore = False, waittime = 1)
         result = BeautifulSoup(html,features="lxml").text
-        collection.append(re.findall(r"月销量(.+?)\n",result))
-    for i in range(1,df[1].size):
-        df[3][i] = collection[i-1] 
+        if product[1] == '天猫':
+            collection.append(re.findall(r"月销量(.+?)\n",result))
+        else:
+            collection.append(re.findall(r"\n(.+?)\n交易成功",result))
+
+        
     
-    with ExcelWriter(date+'产品数据'+'.xlsx') as writer:
-        liuliang_df.to_excel(writer, sheet_name='流量地图',index = None)
+    for i in range(1,df[1].size):
+        df[1][i] = str(df[1][i])
+        df[3][i] = str(collection[i-1][0])
+    
+    with ExcelWriter('竞品销量.xlsx') as writer:
+        df.to_excel(writer, sheet_name='sheet2',index = None,header = None)
     
