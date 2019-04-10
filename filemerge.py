@@ -21,6 +21,7 @@ ban1_product1, ban1_product2, ban1_product3, ban1_product4 = ('钙镁锌','维C'
 ban2_product1, ban2_product2 = ('褪黑素','鱼油')
 ban3_product1, ban3_product2 = ('小精灵','月神')
 ban4_product1 = '清肠片'
+shop = (0,'童年时光海外旗舰店','康一生海外旗舰店','Jarrow海外旗舰店','Erba Vita海外旗舰店')
 
 #流量地图选项卡
 #ban1_address1-4
@@ -66,23 +67,28 @@ liuliang_df.columns = ['产品名称', '日期','来源名称'	,'访客数','浏
     
 '''日报数据'''
 for i in range(1,5):
-    exec ("ribao_address%s = cat_dir1 + ban%s +'/3日报数据/日报数据.xlsx'"%(i,i))
+#    exec ("ribao_address%s = cat_dir1 + ban%s +'/3日报数据/日报数据.xlsx'"%(i,i))
+    exec ("ribao_address%s = cat_dir1 + ban%s +'/3日报数据/日报数据'+'-'+date+'.xls'"%(i,i))
 
-biaoqian = pd.read_excel(ribao_address1,header = None)
-_biaoqian = biaoqian[0:1]
+biaoqian = pd.read_excel(ribao_address1,header = None,index = None)
+_biaoqian = biaoqian[7:8]
 for i in range(1,5):
     exec ("ribao_df%s = pd.read_excel(ribao_address%s,header = None)"%(i,i))
-    exec ("_ribao_df%s = ribao_df%s[1:2]"%(i,i))
+#    exec ("_shop%s = pd.Series([shop[%s]])"%(i,i))
+    exec ("_ribao_df%s = ribao_df%s[8:9]"%(i,i))
+#    exec ("print(_shop%s)"%i)
+    exec ("_ribao_df%s.insert(0,'品牌名称', shop[%s])"%(i,i))
+
 
 ribao_df = None
 ribao_df = _ribao_df1
 for i in range(2,5):
     exec ("ribao_df = ribao_df.append(_ribao_df%s,sort=False)"%i)
     
-num = ribao_df[0:1].shape[1]
-list0 = []
+num = _biaoqian[0:1].shape[1]
+list0 = ["品牌名称"]
 for i in range(0, num):
-    list0.append(_biaoqian[i][0])
+    list0.append(_biaoqian.iloc[0,i])
 ribao_df.columns = list0
 
 
