@@ -45,7 +45,7 @@ def get_attitudes(identity, page, headers):
         json_obj = json.loads(html)
         try:
             for j in range(len(json_obj["data"]["data"])):
-                content = str(json_obj["data"]["data"][j]["user"]["id"])
+                content = str(json_obj["data"]["data"][j]["user"]["id"])+'   '+str(json_obj["data"]["data"][j]["user"]["screen_name"])
                 result = result + content +'\n'
         except:
             continue
@@ -90,7 +90,7 @@ def get_statuses(identity, page, headers):
     
 
 def write_file(file_name, data, part):
-    with open(file_name + part +'.txt', 'a+') as f:
+    with open('C:\Users\Administrator\Desktop\data\\' +file_name + part +'.txt','a+') as f:
         f.write(data)
     f.close()
     
@@ -110,8 +110,8 @@ def main():
 
 # 将请求头字符串转化为字典
         headers = headers_raw_to_dict(headers)
-        file_name = '#缺觉一代#中国日报'
-        identity = '4362932219289158'
+        file_name = '#缺觉一代#环球时报'
+        identity = '4362948325812636'
         page1 = get_page(identity, headers)
         page2 = get_attitudes_page(identity, headers)
         
