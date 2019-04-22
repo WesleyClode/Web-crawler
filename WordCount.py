@@ -67,6 +67,7 @@ wc = wordcloud.WordCloud(
 
 wc.generate_from_frequencies(word_counts) # 从字典生成词云
 #image_colors = wordcloud.ImageColorGenerator(mask) # 从背景图建立颜色方案
+
 #wc.recolor(color_func=image_colors) # 将词云颜色设置为背景图方案
 plt.imshow(wc) # 显示词云
 plt.axis('off') # 关闭坐标轴
