@@ -18,17 +18,17 @@ import matplotlib.pyplot as plt # 图像展示库
 # 读取文件
 
 #file = 'C:/Users/Administrator/Desktop/文件/code/小钢铁侠竞品&评价.xlsx'
-NAME = '小精灵'
-file = 'C:/Users/Administrator/Desktop/文件/code/'+NAME+'.xls'
+NAME = '小钢铁侠竞品&评价'
+file = 'C:/Users/Administrator/Desktop/文件/code/'+NAME+'.xlsx'
 
-#df = pd.read_excel(file,sheet_name='小钢铁侠评价',header = None)
-df = pd.read_excel(file,header = None)
+df = pd.read_excel(file,sheet_name='小钢铁侠评价',header = None)
+#df = pd.read_excel(file,header = None)
 length = df.shape[0]
 _df = df[1:length]
 string_data=''
-for i in _df[1]:
-    if i != '此用户没有填写评价。':
-        string_data += i
+for i in _df[2]:
+    if i != '此用户没有填写评价。' or _df[2][1]:
+        string_data += str(i)
         
 
 # 文本预处理
@@ -42,7 +42,7 @@ seg_list_exact = jieba.cut(string_data, cut_all = False) # 精确模式分词
 
 object_list = []
 remove_words = [u'的', u'，',u'和', u'是', u'随着', u'对于', u'对',u'等',u'能',u'都',u'。',u' ',u'、',u'中',u'在',u'了',u'！',u'很',u'也',u'吃',u'给',
-                u'通常',u'如果',u'我们',u'需要','喝',u'宝宝',u'好',u'我',u'还',u'…',u'就',u'有',u'不',u'�'] # 自定义去除词库
+                u'通常',u'如果',u'我们',u'需要','喝',u'宝宝',u'好',u'我',u'还',u'…',u'就',u'有',u'不',u'�',u'nannan',u'nan'] # 自定义去除词库
 
 for word in seg_list_exact: # 循环读出每个分词
     if word not in remove_words: # 如果不在去除词库中
