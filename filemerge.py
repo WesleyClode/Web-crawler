@@ -134,33 +134,3 @@ with ExcelWriter(date+'产品数据'+'.xlsx') as writer:
     ribao_df.to_excel(writer, sheet_name='日报数据',index = None)
     
     
-    
-#num = ribao_df[0:1].shape[1]
-#list0 = []
-#for i in range(0, num):
-#    list0.append(ribao_df[0:1][i][0])
-#    
-    
-    
-    
-    
-    
-    
-#with open( 'all.txt', 'a+') as f:
-#    
-#    
-#
-#
-#for i in range(1,13):
-#    exec ("result = np.concatenate((result, file%s))"%i)
-#      
-#uniques = np.unique(result)
-##uniques = (uniques).encode("utf8")  
-#
-##f = open(cat_dir + "小皮.txt",'w'):
-#with open(cat_dir + '小皮all.txt', 'a+') as f:
-#    for i in range(len(uniques)):
-#         f.write(uniques[i][-10:]+'\n')
-#f.close()
-#
-#        
