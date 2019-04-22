@@ -28,7 +28,6 @@ headers = headers_raw_to_dict(headers)
 for i in range(2, 59):
     print('第' + str(i) + '页')
     time.sleep(5)
-
 #    url = 'https://weibo.cn/comment/HjNyl82IU?uid=5852861043&rl=0&page=' + str(i)
     url ='https://weibo.cn/comment/Hjoazg9X6?ckAll=1&page=' + str(i)
     response = requests.get(url=url, headers=headers)
