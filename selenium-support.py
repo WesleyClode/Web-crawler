@@ -30,6 +30,7 @@ def getHtml(url, loadmore = False, waittime = 1):
     return html
 
     
+
 if __name__ == "__main__":
     collection = []
     for product in chanpin:
